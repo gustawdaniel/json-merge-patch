@@ -1,9 +1,9 @@
-use serde_json::{Map, Value};
+use serde_json::{ Value};
 
 pub fn json_merge_patch(target: &mut Value, patch: &Value) {
     match patch {
         Value::Object(patch_obj) => {
-            if !target.is_object() && !(target.is_array() && patch_obj.keys().all(|key| key.parse::<usize>().is_ok())) {
+            if !(target.is_object() || target.is_array() && patch_obj.keys().all(|key| key.parse::<usize>().is_ok())) {
                 *target = Value::Object(serde_json::Map::new());
             }
 
