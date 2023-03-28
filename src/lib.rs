@@ -50,31 +50,6 @@ pub fn json_merge_patch(target: &mut Value, patch: &Value) {
     }
 }
 
-// pub fn json_merge_patch(target: &mut Value, patch: &Value) {
-//     match patch {
-//         Value::Object(patch_obj) => {
-//             if !target.is_object() {
-//                 *target = Value::Array(Vec::new());
-//             }
-//
-//             if let Value::Array(target_arr) = target {
-//                 let patch_keys: Vec<_> = patch_obj.keys().collect();
-//                 for (index, target_value) in target_arr.iter_mut().enumerate() {
-//                     if let Value::Object(target_obj) = target_value {
-//                         let mut patch_obj = Map::new();
-//                         for key in patch_keys.iter() {
-//                             if let Some(value) = patch_obj.remove(&key) {
-//                                 json_merge_patch(&mut target_obj[&key], &value);
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//         _ => *target = patch.clone(),
-//     }
-// }
-
 #[cfg(test)]
 mod tests {
     use super::*;
